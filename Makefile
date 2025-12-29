@@ -119,6 +119,11 @@ compare: $(roms) $(patches)
 tools:
 	$(MAKE) -C tools/
 
+crystal_debug:
+	tools/free_space.awk BANK=all pokecrystal_debug.map
+
+crystal11_debug:
+	tools/free_space.awk BANK=all pokecrystal11_debug.map
 
 RGBASMFLAGS += -Q8 -P includes.asm
 # Create a sym/map for debug purposes if `make` run with `DEBUG=1`
