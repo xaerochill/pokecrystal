@@ -65,6 +65,8 @@ if DEF(_DEBUG)
 	giveitem MASTER_BALL, 99
 	giveitem ESCAPE_ROPE, 99
 	giveitem BICYCLE
+	giveitem COIN_CASE
+	givecoins 9999
 	setflag ENGINE_BIKE_SHOP_CALL_ENABLED
 	setevent EVENT_GOT_BICYCLE
 	; all badges

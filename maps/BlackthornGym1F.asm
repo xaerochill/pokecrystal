@@ -66,10 +66,8 @@ BlackthornGymClairScript:
 	iftrue .GotTM24
 	writetext BlackthornGymClairText_YouKeptMeWaiting
 	promptbutton
-	giveitem TM_DRAGONBREATH
-	iffalse .BagFull
+	verbosegivetmhm TM_DRAGONBREATH
 	getitemname STRING_BUFFER_3, TM_DRAGONBREATH
-	writetext BlackthornGymText_ReceivedTM24
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
@@ -77,12 +75,6 @@ BlackthornGymClairScript:
 	writetext BlackthornGymClairText_DescribeTM24
 	promptbutton
 	sjump .GotTM24
-
-.BagFull:
-	writetext BlackthornGymClairText_BagFull
-	waitbutton
-	closetext
-	end
 
 .GotTM24:
 	writetext BlackthornGymClairText_League
@@ -229,11 +221,6 @@ BlackthornGymClairText_YouKeptMeWaiting:
 	para "Here! Take this!"
 	done
 
-BlackthornGymText_ReceivedTM24:
-	text "<PLAYER> received"
-	line "TM24."
-	done
-
 BlackthornGymClairText_DescribeTM24:
 	text "That contains"
 	line "DRAGONBREATH."
@@ -245,11 +232,6 @@ BlackthornGymClairText_DescribeTM24:
 	para "If you don't want"
 	line "it, you don't have"
 	cont "to take it."
-	done
-
-BlackthornGymClairText_BagFull:
-	text "What is this? You"
-	line "don't have room?"
 	done
 
 BlackthornGymClairText_League:

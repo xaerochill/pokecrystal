@@ -23,13 +23,11 @@ CeladonMansionRoofHousePharmacistScript:
 .Night:
 	writetext CeladonMansionRoofHousePharmacistStoryText
 	promptbutton
-	verbosegiveitem TM_CURSE
-	iffalse .NoRoom
+	verbosegivetmhm TM_CURSE
 	setevent EVENT_GOT_TM03_CURSE
 .GotCurse:
 	writetext CeladonMansionRoofHousePharmacistCurseText
 	waitbutton
-.NoRoom:
 	closetext
 	end
 

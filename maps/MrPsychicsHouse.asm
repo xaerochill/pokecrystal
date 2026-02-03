@@ -13,13 +13,11 @@ MrPsychic:
 	iftrue .AlreadyGotItem
 	writetext MrPsychicText1
 	promptbutton
-	verbosegiveitem TM_PSYCHIC_M
-	iffalse .Done
+	verbosegivetmhm TM_PSYCHIC_M
 	setevent EVENT_GOT_TM29_PSYCHIC
 .AlreadyGotItem:
 	writetext MrPsychicText2
 	waitbutton
-.Done:
 	closetext
 	end
 

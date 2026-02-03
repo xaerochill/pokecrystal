@@ -171,12 +171,10 @@ PowerPlantManager:
 	iftrue .GotZapCannon
 	writetext PowerPlantManagerTakeThisTMText
 	promptbutton
-	verbosegiveitem TM_ZAP_CANNON
-	iffalse .NoRoom
+	verbosegivetmhm TM_ZAP_CANNON
 	setevent EVENT_GOT_TM07_ZAP_CANNON
 	writetext PowerPlantManagerTM07IsZapCannonText
 	waitbutton
-.NoRoom:
 	closetext
 	end
 

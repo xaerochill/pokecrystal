@@ -38,8 +38,7 @@ CeladonGymErikaScript:
 	iftrue .GotGigaDrain
 	writetext ErikaExplainTMText
 	promptbutton
-	verbosegiveitem TM_GIGA_DRAIN
-	iffalse .GotGigaDrain
+	verbosegivetmhm TM_GIGA_DRAIN
 	setevent EVENT_GOT_TM19_GIGA_DRAIN
 .GotGigaDrain:
 	writetext ErikaAfterBattleText

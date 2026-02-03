@@ -37,22 +37,22 @@ GoldenrodDeptStore5FClerkScript:
 	sjump .onlyheadbutt
 
 .neither
-	pokemart MARTTYPE_STANDARD, MART_GOLDENROD_5F_1
+	pokemart MARTTYPE_TM_SHOP, MART_GOLDENROD_5F_1
 	closetext
 	end
 
 .onlyheadbutt
-	pokemart MARTTYPE_STANDARD, MART_GOLDENROD_5F_2
+	pokemart MARTTYPE_TM_SHOP, MART_GOLDENROD_5F_2
 	closetext
 	end
 
 .onlyrocksmash
-	pokemart MARTTYPE_STANDARD, MART_GOLDENROD_5F_3
+	pokemart MARTTYPE_TM_SHOP, MART_GOLDENROD_5F_3
 	closetext
 	end
 
 .both
-	pokemart MARTTYPE_STANDARD, MART_GOLDENROD_5F_4
+	pokemart MARTTYPE_TM_SHOP, MART_GOLDENROD_5F_4
 	closetext
 	end
 
@@ -73,8 +73,7 @@ GoldenrodDeptStore5FReceptionistScript:
 .VeryHappy:
 	writetext GoldenrodDeptStore5FReceptionistThisMoveShouldBePerfectText
 	promptbutton
-	verbosegiveitem TM_RETURN
-	iffalse .Done
+	verbosegivetmhm TM_RETURN
 	setflag ENGINE_GOLDENROD_DEPT_STORE_TM27_RETURN
 	closetext
 	end
@@ -88,8 +87,7 @@ GoldenrodDeptStore5FReceptionistScript:
 .NotVeryHappy:
 	writetext GoldenrodDeptStore5FReceptionistItLooksEvilHowAboutThisTMText
 	promptbutton
-	verbosegiveitem TM_FRUSTRATION
-	iffalse .Done
+	verbosegivetmhm TM_FRUSTRATION
 	setflag ENGINE_GOLDENROD_DEPT_STORE_TM27_RETURN
 	closetext
 	end
@@ -97,7 +95,6 @@ GoldenrodDeptStore5FReceptionistScript:
 .EventIsOver:
 	writetext GoldenrodDeptStore5FReceptionistThereAreTMsPerfectForMonText
 	waitbutton
-.Done:
 	closetext
 	end
 

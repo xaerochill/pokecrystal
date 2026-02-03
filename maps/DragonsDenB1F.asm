@@ -54,8 +54,7 @@ DragonsDenB1F_ClairScene:
 	opentext
 	writetext ClairText_GiveDragonbreathDragonDen
 	promptbutton
-	giveitem TM_DRAGONBREATH
-	iffalse .BagFull
+	verbosegivetmhm TM_DRAGONBREATH
 	getitemname STRING_BUFFER_3, TM_DRAGONBREATH
 	writetext Text_ReceivedTM24
 	playsound SFX_ITEM
@@ -69,10 +68,6 @@ DragonsDenB1F_ClairScene:
 	closetext
 	sjump .FinishClair
 
-.BagFull:
-	writetext ClairText_NoRoom
-	waitbutton
-	closetext
 .FinishClair:
 	applymovement DRAGONSDENB1F_CLAIR, MovementDragonsDen_ClairWalksAway
 	special FadeOutMusic
@@ -231,17 +226,6 @@ ClairText_DescribeDragonbreathDragonDen:
 	para "If you don't want"
 	line "it, you don't have"
 	cont "to take it."
-	done
-
-ClairText_NoRoom:
-	text "Oh? You don't have"
-	line "any room for this."
-
-	para "I'm going back to"
-	line "the GYM, so make"
-
-	para "room, then come"
-	line "see me there."
 	done
 
 ClairText_WhatsTheMatterDragonDen:

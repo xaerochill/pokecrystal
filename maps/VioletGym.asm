@@ -38,8 +38,7 @@ VioletGymFalknerScript:
 	specialphonecall SPECIALCALL_ASSISTANT
 	writetext FalknerZephyrBadgeText
 	promptbutton
-	verbosegiveitem TM_MUD_SLAP
-	iffalse .NoRoomForMudSlap
+	verbosegivetmhm TM_MUD_SLAP
 	setevent EVENT_GOT_TM31_MUD_SLAP
 	writetext FalknerTMMudSlapText
 	waitbutton
@@ -49,7 +48,6 @@ VioletGymFalknerScript:
 .SpeechAfterTM:
 	writetext FalknerFightDoneText
 	waitbutton
-.NoRoomForMudSlap:
 	closetext
 	end
 

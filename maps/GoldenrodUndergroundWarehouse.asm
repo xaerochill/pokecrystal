@@ -90,7 +90,7 @@ GoldenrodUndergroundWarehouseMaxEther:
 	itemball MAX_ETHER
 
 GoldenrodUndergroundWarehouseTMSleepTalk:
-	itemball TM_SLEEP_TALK
+	tmhmball TM_SLEEP_TALK
 
 GoldenrodUndergroundWarehouseUltraBall:
 	itemball ULTRA_BALL

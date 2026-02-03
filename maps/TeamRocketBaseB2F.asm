@@ -285,7 +285,7 @@ RocketBaseElectrodeScript:
 	opentext
 	writetext RocketBaseLanceElectrodeDoneText
 	promptbutton
-	verbosegiveitem HM_WHIRLPOOL
+	verbosegivetmhm HM_WHIRLPOOL
 	setevent EVENT_GOT_HM06_WHIRLPOOL
 	writetext RocketBaseLanceWhirlpoolText
 	waitbutton
@@ -351,7 +351,7 @@ TeamRocketBaseB2FTransmitterScript:
 	end
 
 TeamRocketBaseB2FTMThief:
-	itemball TM_THIEF
+	tmhmball TM_THIEF
 
 TeamRocketBaseB2FHiddenFullHeal:
 	hiddenitem FULL_HEAL, EVENT_TEAM_ROCKET_BASE_B2F_HIDDEN_FULL_HEAL

@@ -39,34 +39,40 @@ CeladonPrizeRoom_tmcounterloop:
 	sjump CeladonPrizeRoom_CancelPurchaseScript
 
 .DoubleTeam:
+	checktmhm TM_DOUBLE_TEAM
+	iftrue CeladonPrizeRoom_alreadyhavetm
 	checkcoins CELADONGAMECORNERPRIZEROOM_TM32_COINS
 	ifequal HAVE_LESS, CeladonPrizeRoom_notenoughcoins
-	getitemname STRING_BUFFER_3, TM_DOUBLE_TEAM
+	gettmhmname STRING_BUFFER_3, TM_DOUBLE_TEAM
 	scall CeladonPrizeRoom_askbuy
 	iffalse CeladonPrizeRoom_CancelPurchaseScript
-	giveitem TM_DOUBLE_TEAM
+	verbosegivetmhm TM_DOUBLE_TEAM
 	iffalse CeladonPrizeRoom_notenoughroom
 	takecoins CELADONGAMECORNERPRIZEROOM_TM32_COINS
 	sjump CeladonPrizeRoom_purchased
 
 .Psychic:
+	checktmhm TM_PSYCHIC_M
+	iftrue CeladonPrizeRoom_alreadyhavetm
 	checkcoins CELADONGAMECORNERPRIZEROOM_TM29_COINS
 	ifequal HAVE_LESS, CeladonPrizeRoom_notenoughcoins
-	getitemname STRING_BUFFER_3, TM_PSYCHIC_M
+	gettmhmname STRING_BUFFER_3, TM_PSYCHIC_M
 	scall CeladonPrizeRoom_askbuy
 	iffalse CeladonPrizeRoom_CancelPurchaseScript
-	giveitem TM_PSYCHIC_M
+	verbosegivetmhm TM_PSYCHIC_M
 	iffalse CeladonPrizeRoom_notenoughroom
 	takecoins CELADONGAMECORNERPRIZEROOM_TM29_COINS
 	sjump CeladonPrizeRoom_purchased
 
 .HyperBeam:
+	checktmhm TM_HYPER_BEAM
+	iftrue CeladonPrizeRoom_alreadyhavetm
 	checkcoins CELADONGAMECORNERPRIZEROOM_TM15_COINS
 	ifequal HAVE_LESS, CeladonPrizeRoom_notenoughcoins
-	getitemname STRING_BUFFER_3, TM_HYPER_BEAM
+	gettmhmname STRING_BUFFER_3, TM_HYPER_BEAM
 	scall CeladonPrizeRoom_askbuy
 	iffalse CeladonPrizeRoom_CancelPurchaseScript
-	giveitem TM_HYPER_BEAM
+	verbosegivetmhm TM_HYPER_BEAM
 	iffalse CeladonPrizeRoom_notenoughroom
 	takecoins CELADONGAMECORNERPRIZEROOM_TM15_COINS
 	sjump CeladonPrizeRoom_purchased
@@ -81,6 +87,12 @@ CeladonPrizeRoom_purchased:
 	playsound SFX_TRANSACTION
 	writetext CeladonPrizeRoom_HereYouGoText
 	waitbutton
+	sjump CeladonPrizeRoom_tmcounterloop
+
+CeladonPrizeRoom_alreadyhavetm:
+	writetext CeladonPrizeRoom_AlreadyHaveTMText
+	waitbutton
+	closetext
 	sjump CeladonPrizeRoom_tmcounterloop
 
 CeladonPrizeRoom_notenoughcoins:
@@ -257,6 +269,11 @@ CeladonPrizeRoom_HereYouGoText:
 CeladonPrizeRoom_NotEnoughCoinsText:
 	text "You don't have"
 	line "enough coins."
+	done
+
+CeladonPrizeRoom_AlreadyHaveTMText:
+	text "You already have"
+	line "that TM."
 	done
 
 CeladonPrizeRoom_NotEnoughRoomText:

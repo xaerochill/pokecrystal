@@ -18,10 +18,8 @@ Celebrity:
 	iftrue .AlreadyGotItem
 	writetext CelebrityText1
 	promptbutton
-	verbosegiveitem TM_STEEL_WING
-	iffalse .Done
+	verbosegivetmhm TM_STEEL_WING
 	setevent EVENT_GOT_TM47_STEEL_WING
-.Done:
 	closetext
 	end
 .AlreadyGotItem:

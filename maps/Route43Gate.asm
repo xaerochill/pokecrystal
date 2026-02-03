@@ -113,8 +113,7 @@ OfficerScript_GuardWithSludgeBomb:
 	iftrue .GotSludgeBomb
 	writetext OfficerText_FoundTM
 	promptbutton
-	verbosegiveitem TM_SLUDGE_BOMB
-	iffalse .NoRoomForSludgeBomb
+	verbosegivetmhm TM_SLUDGE_BOMB
 	setevent EVENT_GOT_TM36_SLUDGE_BOMB
 	closetext
 	end
@@ -122,7 +121,6 @@ OfficerScript_GuardWithSludgeBomb:
 .GotSludgeBomb:
 	writetext OfficerText_AvoidGrass
 	waitbutton
-.NoRoomForSludgeBomb:
 	closetext
 	end
 

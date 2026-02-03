@@ -349,7 +349,7 @@ IlexForestCharcoalMasterScript:
 	iftrue .AlreadyGotCut
 	writetext Text_CharcoalMasterIntro
 	promptbutton
-	verbosegiveitem HM_CUT
+	verbosegivetmhm HM_CUT
 	setevent EVENT_GOT_HM01_CUT
 	writetext Text_CharcoalMasterOutro
 	waitbutton
@@ -375,13 +375,11 @@ IlexForestHeadbuttGuyScript:
 	iftrue .AlreadyGotHeadbutt
 	writetext Text_HeadbuttIntro
 	promptbutton
-	verbosegiveitem TM_HEADBUTT
-	iffalse .BagFull
+	verbosegivetmhm TM_HEADBUTT
 	setevent EVENT_GOT_TM02_HEADBUTT
 .AlreadyGotHeadbutt:
 	writetext Text_HeadbuttOutro
 	waitbutton
-.BagFull:
 	closetext
 	end
 

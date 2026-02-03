@@ -97,15 +97,13 @@ CianwoodCityChucksWife:
 .BeatChuck:
 	writetext ChucksWifeGiveHMText
 	promptbutton
-	verbosegiveitem HM_FLY
-	iffalse .Done
+	verbosegivetmhm HM_FLY
 	setevent EVENT_GOT_HM02_FLY
 	writetext ChucksWifeFlySpeechText
 	promptbutton
 .GotFly:
 	writetext ChucksWifeChubbyText
 	waitbutton
-.Done:
 	closetext
 	end
 

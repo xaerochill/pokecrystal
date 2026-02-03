@@ -9,7 +9,7 @@ IcePath1F_MapScripts:
 	def_callbacks
 
 IcePath1FHMWaterfall:
-	itemball HM_WATERFALL
+	tmhmball HM_WATERFALL
 
 IcePath1FPPUp:
 	itemball PP_UP
