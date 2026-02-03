@@ -191,72 +191,72 @@ ItemDescriptions:
 	dw MusicMailDesc
 	dw MirageMailDesc
 	dw TeruSama25Desc
-	assert_table_length NUM_ITEMS
-	dw TeruSama26Desc
-	dw TeruSama26Desc
-	dw TeruSama26Desc
-	dw TeruSama26Desc
-	dw TeruSama26Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama28Desc
-	dw TeruSama29Desc
-	dw TeruSama30Desc
-	dw TeruSama31Desc
-	dw TeruSama32Desc
-	dw TeruSama33Desc
+	; ITEM_BF - ITEM_FE (placeholder items, formerly TMs/HMs)
+	dw TeruSama29Desc ; BF - old TM01
+	dw TeruSama29Desc ; C0 - old TM02
+	dw TeruSama29Desc ; C1 - old TM03
+	dw TeruSama29Desc ; C2 - old TM04
+	dw TeruSama29Desc ; C3
+	dw TeruSama29Desc ; C4 - old TM05
+	dw TeruSama29Desc ; C5 - old TM06
+	dw TeruSama29Desc ; C6 - old TM07
+	dw TeruSama29Desc ; C7 - old TM08
+	dw TeruSama29Desc ; C8 - old TM09
+	dw TeruSama29Desc ; C9 - old TM10
+	dw TeruSama29Desc ; CA - old TM11
+	dw TeruSama29Desc ; CB - old TM12
+	dw TeruSama29Desc ; CC - old TM13
+	dw TeruSama29Desc ; CD - old TM14
+	dw TeruSama29Desc ; CE - old TM15
+	dw TeruSama29Desc ; CF - old TM16
+	dw TeruSama29Desc ; D0 - old TM17
+	dw TeruSama29Desc ; D1 - old TM18
+	dw TeruSama29Desc ; D2 - old TM19
+	dw TeruSama29Desc ; D3 - old TM20
+	dw TeruSama29Desc ; D4 - old TM21
+	dw TeruSama29Desc ; D5 - old TM22
+	dw TeruSama29Desc ; D6 - old TM23
+	dw TeruSama29Desc ; D7 - old TM24
+	dw TeruSama29Desc ; D8 - old TM25
+	dw TeruSama29Desc ; D9 - old TM26
+	dw TeruSama29Desc ; DA - old TM27
+	dw TeruSama29Desc ; DB - old TM28
+	dw TeruSama29Desc ; DC
+	dw TeruSama29Desc ; DD - old TM29
+	dw TeruSama29Desc ; DE - old TM30
+	dw TeruSama29Desc ; DF - old TM31
+	dw TeruSama29Desc ; E0 - old TM32
+	dw TeruSama29Desc ; E1 - old TM33
+	dw TeruSama29Desc ; E2 - old TM34
+	dw TeruSama29Desc ; E3 - old TM35
+	dw TeruSama29Desc ; E4 - old TM36
+	dw TeruSama29Desc ; E5 - old TM37
+	dw TeruSama29Desc ; E6 - old TM38
+	dw TeruSama29Desc ; E7 - old TM39
+	dw TeruSama29Desc ; E8 - old TM40
+	dw TeruSama29Desc ; E9 - old TM41
+	dw TeruSama29Desc ; EA - old TM42
+	dw TeruSama29Desc ; EB - old TM43
+	dw TeruSama29Desc ; EC - old TM44
+	dw TeruSama29Desc ; ED - old TM45
+	dw TeruSama29Desc ; EE - old TM46
+	dw TeruSama29Desc ; EF - old TM47
+	dw TeruSama29Desc ; F0 - old TM48
+	dw TeruSama29Desc ; F1 - old TM49
+	dw TeruSama29Desc ; F2 - old TM50
+	dw TeruSama29Desc ; F3 - old HM01
+	dw TeruSama29Desc ; F4 - old HM02
+	dw TeruSama29Desc ; F5 - old HM03
+	dw TeruSama29Desc ; F6 - old HM04
+	dw TeruSama29Desc ; F7 - old HM05
+	dw TeruSama29Desc ; F8 - old HM06
+	dw TeruSama29Desc ; F9 - old HM07
+	dw TeruSama29Desc ; FA
+	dw TeruSama29Desc ; FB
+	dw TeruSama29Desc ; FC
+	dw TeruSama29Desc ; FD
+	dw TeruSama29Desc ; FE
+	dw TeruSama29Desc ; FF
 	assert_table_length $ff
 
 MasterBallDesc:

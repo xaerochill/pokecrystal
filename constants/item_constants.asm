@@ -196,120 +196,71 @@
 	const MUSIC_MAIL   ; bc
 	const MIRAGE_MAIL  ; bd
 	const ITEM_BE      ; be
+	const ITEM_BF      ; bf - TM01
+	const ITEM_C0      ; c0 - TM02
+	const ITEM_C1      ; c1 - TM03
+	const ITEM_C2      ; c2 - TM04
+	const ITEM_C3      ; c3
+	const ITEM_C4      ; c4 - TM05
+	const ITEM_C5      ; c5 - TM06
+	const ITEM_C6      ; c6 - TM07
+	const ITEM_C7      ; c7 - TM08
+	const ITEM_C8      ; c8 - TM09
+	const ITEM_C9      ; c9 - TM10
+	const ITEM_CA      ; ca - TM11
+	const ITEM_CB      ; cb - TM12
+	const ITEM_CC      ; cc - TM13
+	const ITEM_CD      ; cd - TM14
+	const ITEM_CE      ; ce - TM15
+	const ITEM_CF      ; cf - TM16
+	const ITEM_D0      ; d0 - TM17
+	const ITEM_D1      ; d1 - TM18
+	const ITEM_D2      ; d2 - TM19
+	const ITEM_D3      ; d3 - TM20
+	const ITEM_D4      ; d4 - TM21
+	const ITEM_D5      ; d5 - TM22
+	const ITEM_D6      ; d6 - TM23
+	const ITEM_D7      ; d7 - TM24
+	const ITEM_D8      ; d8 - TM25
+	const ITEM_D9      ; d9 - TM26
+	const ITEM_DA      ; da - TM27
+	const ITEM_DB      ; db - TM28
+	const ITEM_DC      ; dc
+	const ITEM_DD      ; dd - TM29
+	const ITEM_DE      ; de - TM30
+	const ITEM_DF      ; df - TM31
+	const ITEM_E0      ; e0 - TM32
+	const ITEM_E1      ; e1 - TM33
+	const ITEM_E2      ; e2 - TM34
+	const ITEM_E3      ; e3 - TM35
+	const ITEM_E4      ; e4 - TM36
+	const ITEM_E5      ; e5 - TM37
+	const ITEM_E6      ; e6 - TM38
+	const ITEM_E7      ; e7 - TM39
+	const ITEM_E8      ; e8 - TM40
+	const ITEM_E9      ; e9 - TM41
+	const ITEM_EA      ; ea - TM42
+	const ITEM_EB      ; eb - TM43
+	const ITEM_EC      ; ec - TM44
+	const ITEM_ED      ; ed - TM45
+	const ITEM_EE      ; ee - TM46
+	const ITEM_EF      ; ef - TM47
+	const ITEM_F0      ; f0 - TM48
+	const ITEM_F1      ; f1 - TM49
+	const ITEM_F2      ; f2 - TM50
+	const ITEM_F3      ; f3 - HM01
+	const ITEM_F4      ; f4 - HM02
+	const ITEM_F5      ; f5 - HM03
+	const ITEM_F6      ; f6 - HM04
+	const ITEM_F7      ; f7 - HM05
+	const ITEM_F8      ; f8 - HM06
+	const ITEM_F9      ; f9 - HM07
+	const ITEM_FA      ; fa
+	const ITEM_FB      ; fb
+	const ITEM_FC      ; fc
+	const ITEM_FD      ; fd
+	const ITEM_FE      ; fe
 DEF NUM_ITEMS EQU const_value - 1
-
-DEF __tmhm_value__ = 1
-
-MACRO add_tmnum
-	DEF \1_TMNUM EQU __tmhm_value__
-	DEF __tmhm_value__ += 1
-ENDM
-
-MACRO add_tm
-; Defines three constants:
-; - TM_\1: the item id, starting at $bf
-; - \1_TMNUM: the learnable TM/HM flag, starting at 1
-; - TM##_MOVE: alias for the move id, equal to the value of \1
-	const TM_\1
-	DEF TM{02d:__tmhm_value__}_MOVE = \1
-	add_tmnum \1
-ENDM
-
-; see data/moves/tmhm_moves.asm for moves
-DEF TM01 EQU const_value
-	add_tm DYNAMICPUNCH ; bf
-	add_tm HEADBUTT     ; c0
-	add_tm CURSE        ; c1
-	add_tm ROLLOUT      ; c2
-	const ITEM_C3       ; c3
-	add_tm ROAR         ; c4
-	add_tm TOXIC        ; c5
-	add_tm ZAP_CANNON   ; c6
-	add_tm ROCK_SMASH   ; c7
-	add_tm PSYCH_UP     ; c8
-	add_tm HIDDEN_POWER ; c9
-	add_tm SUNNY_DAY    ; ca
-	add_tm SWEET_SCENT  ; cb
-	add_tm SNORE        ; cc
-	add_tm BLIZZARD     ; cd
-	add_tm HYPER_BEAM   ; ce
-	add_tm ICY_WIND     ; cf
-	add_tm PROTECT      ; d0
-	add_tm RAIN_DANCE   ; d1
-	add_tm GIGA_DRAIN   ; d2
-	add_tm ENDURE       ; d3
-	add_tm FRUSTRATION  ; d4
-	add_tm SOLARBEAM    ; d5
-	add_tm IRON_TAIL    ; d6
-	add_tm DRAGONBREATH ; d7
-	add_tm THUNDER      ; d8
-	add_tm EARTHQUAKE   ; d9
-	add_tm RETURN       ; da
-	add_tm DIG          ; db
-	const ITEM_DC       ; dc
-	add_tm PSYCHIC_M    ; dd
-	add_tm SHADOW_BALL  ; de
-	add_tm MUD_SLAP     ; df
-	add_tm DOUBLE_TEAM  ; e0
-	add_tm ICE_PUNCH    ; e1
-	add_tm SWAGGER      ; e2
-	add_tm SLEEP_TALK   ; e3
-	add_tm SLUDGE_BOMB  ; e4
-	add_tm SANDSTORM    ; e5
-	add_tm FIRE_BLAST   ; e6
-	add_tm SWIFT        ; e7
-	add_tm DEFENSE_CURL ; e8
-	add_tm THUNDERPUNCH ; e9
-	add_tm DREAM_EATER  ; ea
-	add_tm DETECT       ; eb
-	add_tm REST         ; ec
-	add_tm ATTRACT      ; ed
-	add_tm THIEF        ; ee
-	add_tm STEEL_WING   ; ef
-	add_tm FIRE_PUNCH   ; f0
-	add_tm FURY_CUTTER  ; f1
-	add_tm NIGHTMARE    ; f2
-DEF NUM_TMS EQU __tmhm_value__ - 1
-
-MACRO add_hm
-; Defines three constants:
-; - HM_\1: the item id, starting at $f3
-; - \1_TMNUM: the learnable TM/HM flag, starting at 51
-; - HM##_MOVE: alias for the move id, equal to the value of \1
-	const HM_\1
-	DEF HM_VALUE = __tmhm_value__ - NUM_TMS
-	DEF HM{02d:HM_VALUE}_MOVE = \1
-	add_tmnum \1
-ENDM
-
-DEF HM01 EQU const_value
-	add_hm CUT          ; f3
-	add_hm FLY          ; f4
-	add_hm SURF         ; f5
-	add_hm STRENGTH     ; f6
-	add_hm FLASH        ; f7
-	add_hm WHIRLPOOL    ; f8
-	add_hm WATERFALL    ; f9
-DEF NUM_HMS EQU __tmhm_value__ - NUM_TMS - 1
-
-MACRO add_mt
-; Defines two constants:
-; - \1_TMNUM: the learnable TM/HM flag, starting at 58
-; - MT##_MOVE: alias for the move id, equal to the value of \1
-	DEF MT_VALUE = __tmhm_value__ - NUM_TMS - NUM_HMS
-	DEF MT{02d:MT_VALUE}_MOVE = \1
-	add_tmnum \1
-ENDM
-
-DEF MT01 EQU const_value
-	add_mt FLAMETHROWER
-	add_mt THUNDERBOLT
-	add_mt ICE_BEAM
-DEF NUM_TUTORS = __tmhm_value__ - NUM_TMS - NUM_HMS - 1
-
-DEF NUM_TM_HM_TUTOR EQU NUM_TMS + NUM_HMS + NUM_TUTORS
-
-	const ITEM_FA       ; fa
 
 DEF USE_SCRIPT_VAR EQU $00
 DEF ITEM_FROM_MEM  EQU $ff

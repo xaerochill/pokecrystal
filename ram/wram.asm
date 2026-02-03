@@ -2954,7 +2954,7 @@ wTimeOfDayPalFlags:: db
 wTimeOfDayPalset:: db
 wCurTimeOfDay:: db
 
-	ds 1
+wCurTMHM:: db ; Current TM/HM flag index
 
 wSecretID:: dw
 wStatusFlags::
@@ -2995,7 +2995,9 @@ wBadges::
 wJohtoBadges:: flag_array NUM_JOHTO_BADGES
 wKantoBadges:: flag_array NUM_KANTO_BADGES
 
-wTMsHMs:: ds NUM_TMS + NUM_HMS
+wTMsHMs:: flag_array NUM_TM_HM_FLAGS ; 8 bytes
+
+	ds 49 ; 57 bytes originally - 8 bytes for the `flag_array`
 
 wNumItems:: db
 wItems:: ds MAX_ITEMS * 2 + 1

@@ -190,73 +190,69 @@ ItemNames::
 	li "MUSIC MAIL"
 	li "MIRAGE MAIL"
 	li "TERU-SAMA"
-	assert_list_length NUM_ITEMS
-	li "TM01"
-	li "TM02"
-	li "TM03"
-	li "TM04"
-	li "TERU-SAMA"
-	li "TM05"
-	li "TM06"
-	li "TM07"
-	li "TM08"
-	li "TM09"
-	li "TM10"
-	li "TM11"
-	li "TM12"
-	li "TM13"
-	li "TM14"
-	li "TM15"
-	li "TM16"
-	li "TM17"
-	li "TM18"
-	li "TM19"
-	li "TM20"
-	li "TM21"
-	li "TM22"
-	li "TM23"
-	li "TM24"
-	li "TM25"
-	li "TM26"
-	li "TM27"
-	li "TM28"
-	li "TERU-SAMA"
-	li "TM29"
-	li "TM30"
-	li "TM31"
-	li "TM32"
-	li "TM33"
-	li "TM34"
-	li "TM35"
-	li "TM36"
-	li "TM37"
-	li "TM38"
-	li "TM39"
-	li "TM40"
-	li "TM41"
-	li "TM42"
-	li "TM43"
-	li "TM44"
-	li "TM45"
-	li "TM46"
-	li "TM47"
-	li "TM48"
-	li "TM49"
-	li "TM50"
-	assert_list_length NUM_ITEMS + NUM_TMS + 2 ; count ITEM_C3 and ITEM_DC
-	li "HM01"
-	li "HM02"
-	li "HM03"
-	li "HM04"
-	li "HM05"
-	li "HM06"
-	li "HM07"
-	assert_list_length NUM_ITEMS + NUM_TMS + 2 + NUM_HMS ; count ITEM_C3 and ITEM_DC
-	li "TERU-SAMA"
-	li "TERU-SAMA"
-	li "TERU-SAMA"
-	li "TERU-SAMA"
-	li "TERU-SAMA"
-	li "TERU-SAMA"
-	li "?"
-	assert_list_length $100
+	li "TERU-SAMA" ; BF - old TM01
+	li "TERU-SAMA" ; C0 - old TM02
+	li "TERU-SAMA" ; C1 - old TM03
+	li "TERU-SAMA" ; C2 - old TM04
+	li "TERU-SAMA" ; C3
+	li "TERU-SAMA" ; C4 - old TM05
+	li "TERU-SAMA" ; C5 - old TM06
+	li "TERU-SAMA" ; C6 - old TM07
+	li "TERU-SAMA" ; C7 - old TM08
+	li "TERU-SAMA" ; C8 - old TM09
+	li "TERU-SAMA" ; C9 - old TM10
+	li "TERU-SAMA" ; CA - old TM11
+	li "TERU-SAMA" ; CB - old TM12
+	li "TERU-SAMA" ; CC - old TM13
+	li "TERU-SAMA" ; CD - old TM14
+	li "TERU-SAMA" ; CE - old TM15
+	li "TERU-SAMA" ; CF - old TM16
+	li "TERU-SAMA" ; D0 - old TM17
+	li "TERU-SAMA" ; D1 - old TM18
+	li "TERU-SAMA" ; D2 - old TM19
+	li "TERU-SAMA" ; D3 - old TM20
+	li "TERU-SAMA" ; D4 - old TM21
+	li "TERU-SAMA" ; D5 - old TM22
+	li "TERU-SAMA" ; D6 - old TM23
+	li "TERU-SAMA" ; D7 - old TM24
+	li "TERU-SAMA" ; D8 - old TM25
+	li "TERU-SAMA" ; D9 - old TM26
+	li "TERU-SAMA" ; DA - old TM27
+	li "TERU-SAMA" ; DB - old TM28
+	li "TERU-SAMA" ; DC
+	li "TERU-SAMA" ; DD - old TM29
+	li "TERU-SAMA" ; DE - old TM30
+	li "TERU-SAMA" ; DF - old TM31
+	li "TERU-SAMA" ; E0 - old TM32
+	li "TERU-SAMA" ; E1 - old TM33
+	li "TERU-SAMA" ; E2 - old TM34
+	li "TERU-SAMA" ; E3 - old TM35
+	li "TERU-SAMA" ; E4 - old TM36
+	li "TERU-SAMA" ; E5 - old TM37
+	li "TERU-SAMA" ; E6 - old TM38
+	li "TERU-SAMA" ; E7 - old TM39
+	li "TERU-SAMA" ; E8 - old TM40
+	li "TERU-SAMA" ; E9 - old TM41
+	li "TERU-SAMA" ; EA - old TM42
+	li "TERU-SAMA" ; EB - old TM43
+	li "TERU-SAMA" ; EC - old TM44
+	li "TERU-SAMA" ; ED - old TM45
+	li "TERU-SAMA" ; EE - old TM46
+	li "TERU-SAMA" ; EF - old TM47
+	li "TERU-SAMA" ; F0 - old TM48
+	li "TERU-SAMA" ; F1 - old TM49
+	li "TERU-SAMA" ; F2 - old TM50
+	li "TERU-SAMA" ; F3 - old HM01
+	li "TERU-SAMA" ; F4 - old HM02
+	li "TERU-SAMA" ; F5 - old HM03
+	li "TERU-SAMA" ; F6 - old HM04
+	li "TERU-SAMA" ; F7 - old HM05
+	li "TERU-SAMA" ; F8 - old HM06
+	li "TERU-SAMA" ; F9 - old HM07
+	li "TERU-SAMA" ; FA
+	li "TERU-SAMA" ; FB
+	li "TERU-SAMA" ; FC
+	li "TERU-SAMA" ; FD
+	li "TERU-SAMA" ; FE
+	li "?"         ; FF
+	assert_list_length NUM_ITEMS + 1
