@@ -661,6 +661,19 @@ _MartPackFullText::
 	line "any more items."
 	done
 
+_TMShopAlreadyHaveText::
+	text "You already have"
+	line "this TM."
+	done
+
+_TMShopFinalPriceText::
+	text_ram wStringBuffer1
+	text " will"
+	line "cost ¥@"
+	text_decimal hMoneyTemp, 3, 6
+	text "."
+	done
+
 _MartCantBuyText::
 	text "Sorry, I can't buy"
 	line "that from you."

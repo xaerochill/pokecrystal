@@ -135,34 +135,34 @@ MartGoldenrod4F:
 
 MartGoldenrod5F1:
 	db 3 ; # items
-	db TM_THUNDERPUNCH
-	db TM_FIRE_PUNCH
-	db TM_ICE_PUNCH
+	dbw TM_THUNDERPUNCH, 3000
+	dbw TM_FIRE_PUNCH, 3000
+	dbw TM_ICE_PUNCH, 3000
 	db -1 ; end
 
 MartGoldenrod5F2:
 	db 4 ; # items
-	db TM_THUNDERPUNCH
-	db TM_FIRE_PUNCH
-	db TM_ICE_PUNCH
-	db TM_HEADBUTT
+	dbw TM_THUNDERPUNCH, 3000
+	dbw TM_FIRE_PUNCH, 3000
+	dbw TM_ICE_PUNCH, 3000
+	dbw TM_HEADBUTT, 2000
 	db -1 ; end
 
 MartGoldenrod5F3:
 	db 4 ; # items
-	db TM_THUNDERPUNCH
-	db TM_FIRE_PUNCH
-	db TM_ICE_PUNCH
-	db TM_ROCK_SMASH
+	dbw TM_THUNDERPUNCH, 3000
+	dbw TM_FIRE_PUNCH, 3000
+	dbw TM_ICE_PUNCH, 3000
+	dbw TM_ROCK_SMASH, 1000
 	db -1 ; end
 
 MartGoldenrod5F4:
 	db 5 ; # items
-	db TM_THUNDERPUNCH
-	db TM_FIRE_PUNCH
-	db TM_ICE_PUNCH
-	db TM_HEADBUTT
-	db TM_ROCK_SMASH
+	dbw TM_THUNDERPUNCH, 3000
+	dbw TM_FIRE_PUNCH, 3000
+	dbw TM_ICE_PUNCH, 3000
+	dbw TM_HEADBUTT, 2000
+	dbw TM_ROCK_SMASH, 1000
 	db -1 ; end
 
 MartOlivine:
@@ -314,11 +314,11 @@ MartCeladon2F2:
 
 MartCeladon3F:
 	db 5 ; # items
-	db TM_HIDDEN_POWER
-	db TM_SUNNY_DAY
-	db TM_PROTECT
-	db TM_RAIN_DANCE
-	db TM_SANDSTORM
+	dbw TM_HIDDEN_POWER, 3000
+	dbw TM_SUNNY_DAY, 2000
+	dbw TM_PROTECT, 3000
+	dbw TM_RAIN_DANCE, 2000
+	dbw TM_SANDSTORM, 2000
 	db -1 ; end
 
 MartCeladon4F:

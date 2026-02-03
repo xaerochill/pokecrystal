@@ -24,6 +24,7 @@ MartTypeDialogs:
 	dw BargainShop
 	dw Pharmacist
 	dw RooftopSale
+	dw TMShop
 	assert_table_length NUM_MART_TYPES
 
 MartDialog:
@@ -96,6 +97,21 @@ RooftopSale:
 	ret
 
 INCLUDE "data/items/rooftop_sale.asm"
+
+TMShop:
+	ld hl, wMartPointer
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [wMartPointerBank]
+	call ReadTMMart
+	call LoadStandardMenuHeader
+	ld hl, MartWelcomeText
+	call MartTextbox
+	call TMBuyMenu
+	ld hl, MartComeAgainText
+	call MartTextbox
+	ret
 
 LoadMartPointer:
 	ld a, b
@@ -337,6 +353,49 @@ ReadMart:
 
 INCLUDE "data/items/bargain_shop.asm"
 
+ReadTMMart:
+; load TM mart pointer. Reads TM ID + 2-byte price per entry.
+; input: hl = mart data pointer
+	push hl
+	inc hl ; skip count byte
+	ld bc, wMartItem1BCD
+	ld de, wCurMartItems
+.loop
+	ld a, [wMartPointerBank]
+	call GetFarByte
+	ld [de], a
+	inc hl
+	inc de
+	cp -1
+	jr z, .done
+	; read 2-byte price
+	push de
+	ld a, [wMartPointerBank]
+	call GetFarByte
+	ld e, a
+	inc hl
+	ld a, [wMartPointerBank]
+	call GetFarByte
+	ld d, a
+	inc hl
+	; convert price to BCD at [bc]
+	push hl
+	ld h, b
+	ld l, c
+	ld a, [wMartPointerBank]
+	call GetMartPrice
+	ld b, h
+	ld c, l
+	pop hl
+	pop de
+	jr .loop
+.done
+	pop hl
+	ld a, [wMartPointerBank]
+	call GetFarByte
+	ld [wCurMartCount], a
+	ret
+
 BuyMenu:
 	call FadeToMenu
 	farcall BlankScreen
@@ -349,6 +408,125 @@ BuyMenu:
 	jr nc, .loop
 	call CloseSubmenu
 	ret
+
+TMBuyMenu:
+	call FadeToMenu
+	farcall BlankScreen
+	xor a
+	ld [wMenuScrollPositionBackup], a
+	ld a, 1
+	ld [wMenuCursorPositionBackup], a
+.loop
+	call TMBuyMenuLoop
+	jr nc, .loop
+	call CloseSubmenu
+	ret
+
+TMBuyMenuLoop:
+	farcall PlaceMoneyTopRight
+	call UpdateSprites
+	ld hl, MenuHeader_BuyTM
+	call CopyMenuHeader
+	ld a, [wMenuCursorPositionBackup]
+	ld [wMenuCursorPosition], a
+	ld a, [wMenuScrollPositionBackup]
+	ld [wMenuScrollPosition], a
+	call ScrollingMenu
+	ld a, [wMenuScrollPosition]
+	ld [wMenuScrollPositionBackup], a
+	ld a, [wMenuCursorY]
+	ld [wMenuCursorPositionBackup], a
+	call SpeechTextbox
+	ld a, [wMenuJoypad]
+	cp PAD_B
+	jr z, .quit
+	cp PAD_A
+	jr nz, .quit
+	; check if player already owns this TM
+	ld a, [wMenuSelection]
+	ld c, a
+	farcall CheckTMHM
+	jr c, .already_have
+	; load price into hMoneyTemp (MOVED BEFORE TMConfirmPurchase)
+	ld a, [wMartItemID]
+	ld e, a
+	ld d, 0
+	ld hl, wMartPointer
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	inc hl            ; skip count byte
+	add hl, de        ; index * 3
+	add hl, de
+	add hl, de
+	inc hl            ; skip TM ID byte
+	ld a, [wMartPointerBank]
+	call GetFarByte
+	ldh [hMoneyTemp + 2], a
+	inc hl
+	ld a, [wMartPointerBank]
+	call GetFarByte
+	ldh [hMoneyTemp + 1], a
+	xor a
+	ldh [hMoneyTemp], a
+	; confirm purchase
+	call TMConfirmPurchase
+	jr c, .cancel
+	; check money
+	ld de, wMoney
+	ld bc, hMoneyTemp
+	ld a, 3
+	call CompareMoney
+	jr c, .no_money
+	; give TM (set flag)
+	ld a, [wMenuSelection]
+	ld c, a
+	farcall ReceiveTMHM
+	; take money
+	call PlayTransactionSound
+	ld de, wMoney
+	ld bc, hMoneyTemp
+	call TakeMoney
+	ld a, MARTTEXT_HERE_YOU_GO
+	call LoadBuyMenuText
+	call JoyWaitAorB
+.cancel
+	call SpeechTextbox
+	and a
+	ret
+.quit
+	scf
+	ret
+.already_have
+	ld hl, TMShopAlreadyHaveText
+	call PrintText
+	call JoyWaitAorB
+	and a
+	ret
+.no_money
+	ld a, MARTTEXT_NOT_ENOUGH_MONEY
+	call LoadBuyMenuText
+	call JoyWaitAorB
+	and a
+	ret
+
+TMConfirmPurchase:
+; get TM name and ask for confirmation
+	ld a, [wMenuSelection]
+	ld [wNamedObjectIndex], a
+	call GetTMHMName
+	ld a, MARTTEXT_COSTS_THIS_MUCH
+	call LoadBuyMenuText
+	call YesNoBox
+	ret
+
+TMShopAlreadyHaveText:
+	text_far _TMShopAlreadyHaveText
+	text_end
+
+TMShopFinalPriceText:
+	text_far _TMShopFinalPriceText
+	text_end
 
 LoadBuyMenuText:
 ; load text from a nested table
@@ -397,6 +575,7 @@ GetMartDialogGroup:
 	dwb .BargainShopPointers, 1
 	dwb .PharmacyPointers, 0
 	dwb .StandardMartPointers, 2
+	dwb .TMShopPointers, 0
 
 .StandardMartPointers:
 	dw MartHowManyText
@@ -429,6 +608,14 @@ GetMartDialogGroup:
 	dw PharmacyPackFullText
 	dw PharmacyThanksText
 	dw BuyMenuLoop
+
+.TMShopPointers:
+	dw TMBuyMenuLoop
+	dw TMShopFinalPriceText
+	dw MartNoMoneyText
+	dw TMBuyMenuLoop
+	dw MartThanksText
+	dw TMBuyMenuLoop
 
 BuyMenuLoop:
 	farcall PlaceMoneyTopRight
@@ -624,6 +811,42 @@ MenuHeader_Buy:
 	add hl, bc
 	ld c, PRINTNUM_LEADINGZEROS | PRINTNUM_MONEY | 3
 	call PrintBCDNumber
+	ret
+
+MenuHeader_BuyTM:
+	db MENU_BACKUP_TILES ; flags
+	menu_coords 1, 3, SCREEN_WIDTH - 1, TEXTBOX_Y - 1
+	dw .MenuData
+	db 1 ; default option
+
+.MenuData
+	db SCROLLINGMENU_DISPLAY_ARROWS | SCROLLINGMENU_ENABLE_FUNCTION3 ; flags
+	db 4, 8 ; rows, columns
+	db SCROLLINGMENU_ITEMS_NORMAL ; item format
+	dbw 0, wCurMartCount
+	dba PlaceMenuTMName
+	dba MenuHeader_Buy.PrintBCDPrices
+	dba .NoDescription
+
+.PrintBCDPrices:
+	ld a, [wScrollingMenuCursorPosition]
+	ld c, a
+	ld b, 0
+	ld hl, wMartItem1BCD
+	add hl, bc
+	add hl, bc
+	add hl, bc
+	push de
+	ld d, h
+	ld e, l
+	pop hl
+	ld bc, SCREEN_WIDTH
+	add hl, bc
+	ld c, PRINTNUM_LEADINGZEROS | PRINTNUM_MONEY | 3
+	call PrintBCDNumber
+	ret
+
+.NoDescription:
 	ret
 
 HerbShopLadyIntroText:
