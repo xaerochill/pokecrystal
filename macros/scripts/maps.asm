@@ -162,6 +162,12 @@ MACRO itemball
 	endc
 ENDM
 
+MACRO tmhmball
+; TM/HM ball pickup - stores TM/HM number with high bit set
+; \1: TM/HM constant (e.g., TM_MUD_SLAP, HM_CUT)
+	db (\1) | $80, 1 ; high bit marks it as TM/HM
+ENDM
+
 MACRO hiddenitem
 ;\1: item: from constants/item_constants.asm
 ;\2: flag: an EVENT_* constant

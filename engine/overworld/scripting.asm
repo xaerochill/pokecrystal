@@ -234,6 +234,9 @@ ScriptCommandTable:
 	dw Script_getname                    ; a7
 	dw Script_wait                       ; a8
 	dw Script_checksave                  ; a9
+	dw Script_verbosegivetmhm            ; aa
+	dw Script_checktmhm                  ; ab
+	dw Script_gettmhmname                ; ac
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:
@@ -2352,10 +2355,70 @@ Script_checksave:
 	ld [wScriptVar], a
 	ret
 
-Script_checkver_duplicate: ; unreferenced
-	ld a, [.gs_version]
+Script_checktmhm:
+; check if player has TM/HM flag
+; parameters: 1 byte - TM/HM flag index (1-104)
+	call GetScriptByte
+	dec a ; convert to 0-indexed
+	ld e, a
+	ld d, 0
+	ld b, CHECK_FLAG
+	ld hl, wTMsHMs
+	call FlagAction
+	ld a, c
 	ld [wScriptVar], a
 	ret
 
-.gs_version:
-	db GS_VERSION
+Script_verbosegivetmhm:
+; give TM/HM to player (set flag) and display message
+; parameters: 1 byte - TM/HM flag index (1-104)
+	call GetScriptByte
+	ld [wCurTMHM], a
+	
+	; set the flag
+	dec a
+	ld e, a
+	ld d, 0
+	ld b, SET_FLAG
+	ld hl, wTMsHMs
+	call FlagAction
+	
+	; get TM/HM name for display
+	ld a, [wCurTMHM]
+	ld [wNamedObjectIndex], a
+	call GetTMHMName
+	ld de, wStringBuffer1
+	ld a, STRING_BUFFER_4
+	call CopyConvertedText
+	
+	; wScriptVar = TRUE (always succeeds since flags have no limit)
+	ld a, TRUE
+	ld [wScriptVar], a
+	
+	; call the give script
+	ld b, BANK(GiveTMHMScript)
+	ld de, GiveTMHMScript
+	jp ScriptCall
+
+GiveTMHMScript:
+	callasm GiveItemScript_DummyFunction
+	writetext .ReceivedTMHMText
+	waitsfx
+	specialsound
+	waitbutton
+	end
+
+.ReceivedTMHMText:
+	text_far _ReceivedItemText
+	text_end
+
+Script_gettmhmname:
+; get TM/HM name into string buffer
+; parameters: 1 byte - TM/HM number (1-104), 1 byte - string buffer
+	call GetScriptByte
+	ld [wNamedObjectIndex], a
+	call GetTMHMName ; outputs to wStringBuffer1
+	ld de, wStringBuffer1
+	call GetScriptByte ; get string buffer destination
+	call CopyConvertedText
+	ret

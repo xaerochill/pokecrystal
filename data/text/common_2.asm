@@ -538,6 +538,14 @@ _CantCarryItemText::
 	cont "items."
 	done
 
+_TMStoredText::
+	text "<PLAYER> put"
+	line "@"
+	text_ram wStringBuffer3
+	text " in"
+	cont "the TM POCKET."
+	done
+
 _WhitedOutText::
 	text "<PLAYER> is out of"
 	line "useable #MON!"

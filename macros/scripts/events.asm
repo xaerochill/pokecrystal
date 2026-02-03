@@ -1065,4 +1065,24 @@ MACRO checksave
 	db checksave_command
 ENDM
 
+	const verbosegivetmhm_command ; $aa
+MACRO verbosegivetmhm
+	db verbosegivetmhm_command
+	db \1 ; TM/HM number (use MOVE_TMNUM constants, e.g., MEGA_PUNCH_TMNUM)
+ENDM
+
+	const checktmhm_command ; $ab
+MACRO checktmhm
+	db checktmhm_command
+	db \1 ; TM/HM number
+	; sets wScriptVar to TRUE if owned, FALSE if not
+ENDM
+
+	const gettmhmname_command ; $ac
+MACRO gettmhmname
+	db gettmhmname_command
+	db \2 ; TM/HM number
+	db \1 ; string_buffer
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value
