@@ -150,26 +150,17 @@ GetPokemonName::
 
 GetItemName::
 ; Get item name for wNamedObjectIndex.
-
 	push hl
-	push bc
-	ld a, [wNamedObjectIndex]
-
-	cp TM01
-	jr nc, .TM
-
-	ld [wCurSpecies], a
-	ld a, ITEM_NAME
-	ld [wNamedObjectType], a
-	call GetName
-	jr .Copied
-.TM:
-	call GetTMHMName
-.Copied:
-	ld de, wStringBuffer1
-	pop bc
-	pop hl
-	ret
+    push bc
+    ld a, [wNamedObjectIndex]
+    ld [wCurSpecies], a
+    ld a, ITEM_NAME
+    ld [wNamedObjectType], a
+    call GetName
+    ld de, wStringBuffer1
+    pop bc
+    pop hl
+    ret
 
 GetTMHMName::
 ; Get TM/HM name for item wNamedObjectIndex.
@@ -200,6 +191,7 @@ GetTMHMName::
 ; TM/HM number
 	push de
 	ld a, [wNamedObjectIndex]
+	ld [wCurTMHM], a
 	ld c, a
 	callfar GetTMHMNumber
 	pop de
@@ -268,4 +260,57 @@ GetMoveName::
 	ld de, wStringBuffer1
 
 	pop hl
+	ret
+
+AppendTMHMMoveName::
+; Input: c = TM number (1-57), de = pointer past '@'
+; Appends " MOVENAME" to buffer at de
+	ldh a, [hROMBank]
+	push af
+	push hl
+	push bc
+
+	; Overwrite '@' with space
+	dec de
+	ld a, ' '
+	ld [de], a
+	inc de
+	push de                      ; save destination
+
+	; Look up move ID from TMHMMoves[c-1]
+	ld a, c
+	dec a
+	ld hl, TMHMMoves
+	ld b, 0
+	ld c, a
+	add hl, bc
+	ld a, BANK(TMHMMoves)
+	call GetFarByte              ; a = move ID
+
+	; Find move name string in MoveNames
+	dec a                        ; move ID to 0-indexed
+	push af                      ; save move index
+	ld a, BANK(MoveNames)
+	rst Bankswitch
+	pop af                       ; restore move index
+	ld hl, MoveNames
+	call GetNthString            ; hl = pointer to move name
+
+	; Copy move name to destination (WRAM always accessible)
+	pop de                       ; de = destination
+.copy_loop
+	ld a, [hli]
+	cp '@'
+	jr z, .done
+	ld [de], a
+	inc de
+	jr .copy_loop
+.done
+	ld a, '@'
+	ld [de], a
+
+	pop bc
+	pop hl
+	pop af
+	rst Bankswitch               ; restore original bank
 	ret
