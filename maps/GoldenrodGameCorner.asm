@@ -28,7 +28,7 @@ GoldenrodGameCorner_MapScripts:
 GoldenrodGameCornerMoveTutorCallback:
 	checkevent EVENT_BEAT_ELITE_FOUR
 	iffalse .finish
-	checkitem COIN_CASE
+	checkkeyitem KEYITEM_COIN_CASE
 	iffalse .move_tutor_inside
 	readvar VAR_WEEKDAY
 	ifequal WEDNESDAY, .move_tutor_outside
@@ -61,7 +61,7 @@ GoldenrodGameCornerTMVendorScript:
 	opentext
 	writetext GoldenrodGameCornerPrizeVendorIntroText
 	waitbutton
-	checkitem COIN_CASE
+	checkkeyitem KEYITEM_COIN_CASE
 	iffalse GoldenrodGameCornerPrizeVendor_NoCoinCaseScript
 	writetext GoldenrodGameCornerPrizeVendorWhichPrizeText
 GoldenrodGameCornerTMVendor_LoopScript:
@@ -174,7 +174,7 @@ GoldenrodGameCornerPrizeMonVendorScript:
 	opentext
 	writetext GoldenrodGameCornerPrizeVendorIntroText
 	waitbutton
-	checkitem COIN_CASE
+	checkkeyitem KEYITEM_COIN_CASE
 	iffalse GoldenrodGameCornerPrizeVendor_NoCoinCaseScript
 .loop
 	writetext GoldenrodGameCornerPrizeVendorWhichPrizeText

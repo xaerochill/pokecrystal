@@ -21,7 +21,7 @@ Route32Pokecenter1FFishingGuruScript:
 	iffalse .Refused
 	writetext Route32Pokecenter1FFishingGuruText_Yes
 	promptbutton
-	verbosegiveitem OLD_ROD
+	verbosegivekeyitem KEYITEM_OLD_ROD
 	writetext Route32Pokecenter1FFishingGuruText_GiveOldRod
 	waitbutton
 	closetext

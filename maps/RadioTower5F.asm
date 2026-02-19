@@ -43,7 +43,7 @@ FakeDirectorScript:
 	opentext
 	writetext FakeDirectorTextAfter
 	promptbutton
-	verbosegiveitem BASEMENT_KEY
+	verbosegivekeyitem KEYITEM_BASEMENT_KEY
 	closetext
 	setscene SCENE_RADIOTOWER5F_ROCKET_BOSS
 	setevent EVENT_BEAT_ROCKET_EXECUTIVEM_3
@@ -120,7 +120,7 @@ RadioTower5FRocketBossScript:
 	opentext
 	writetext RadioTower5FDirectorThankYouText
 	promptbutton
-	verbosegiveitem CLEAR_BELL
+	verbosegivekeyitem KEYITEM_CLEAR_BELL
 	writetext RadioTower5FDirectorDescribeClearBellText
 	waitbutton
 	closetext

@@ -28,7 +28,7 @@ MrPokemonsHouseMrPokemonEventScript:
 	writetext MrPokemonIntroText2
 	promptbutton
 	waitsfx
-	giveitem MYSTERY_EGG
+	verbosegivekeyitem KEYITEM_MYSTERY_EGG
 	writetext MrPokemonsHouse_GotEggText
 	playsound SFX_KEY_ITEM
 	waitsfx
@@ -50,7 +50,7 @@ MrPokemonsHouseMrPokemonEventScript:
 MrPokemonsHouse_MrPokemonScript:
 	faceplayer
 	opentext
-	checkitem RED_SCALE
+	checkkeyitem KEYITEM_RED_SCALE
 	iftrue .RedScale
 	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
 	iftrue .AlwaysNewDiscoveries
@@ -71,7 +71,7 @@ MrPokemonsHouse_MrPokemonScript:
 	iffalse .refused
 	verbosegiveitem EXP_SHARE
 	iffalse .full
-	takeitem RED_SCALE
+	takekeyitem KEYITEM_RED_SCALE
 	sjump .AlwaysNewDiscoveries
 
 .refused

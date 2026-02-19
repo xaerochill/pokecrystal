@@ -22,7 +22,7 @@ FlowerShopTeacherScript:
 	opentext
 	writetext GoldenrodFlowerShopTeacherHeresTheSquirtbottleText
 	promptbutton
-	verbosegiveitem SQUIRTBOTTLE
+	verbosegivekeyitem KEYITEM_SQUIRTBOTTLE
 	setevent EVENT_GOT_SQUIRTBOTTLE
 	closetext
 	setevent EVENT_FLORIA_AT_SUDOWOODO

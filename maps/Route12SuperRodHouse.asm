@@ -16,8 +16,7 @@ Route12SuperRodHouseFishingGuruScript:
 	iffalse .Refused
 	writetext GiveSuperRodText
 	promptbutton
-	verbosegiveitem SUPER_ROD
-	iffalse .NoRoom
+	verbosegivekeyitem KEYITEM_SUPER_ROD
 	setevent EVENT_GOT_SUPER_ROD
 .GotSuperRod:
 	writetext GaveSuperRodText

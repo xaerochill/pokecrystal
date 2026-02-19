@@ -54,7 +54,7 @@ CeladonGameCornerFisherScript:
 	iftrue .GotCoins
 	writetext CeladonGameCornerFisherText1
 	promptbutton
-	checkitem COIN_CASE
+	checkkeyitem KEYITEM_COIN_CASE
 	iffalse .NoCoinCase
 	checkcoins MAX_COINS - 1
 	ifequal HAVE_MORE, .FullCoinCase

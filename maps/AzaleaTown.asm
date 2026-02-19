@@ -162,7 +162,7 @@ AzaleaTownCelebiScene:
 	promptbutton
 	writetext AzaleaTownKurtText3
 	waitbutton
-	verbosegiveitem GS_BALL
+	verbosegivekeyitem KEYITEM_GS_BALL
 	turnobject AZALEATOWN_KURT_OUTSIDE, LEFT
 	setflag ENGINE_FOREST_IS_RESTLESS
 	clearevent EVENT_ILEX_FOREST_LASS

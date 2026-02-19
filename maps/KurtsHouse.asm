@@ -262,13 +262,13 @@ Kurt1:
 .CanGiveGSBallToKurt:
 	checkevent EVENT_GAVE_GS_BALL_TO_KURT
 	iftrue .GaveGSBallToKurt
-	checkitem GS_BALL
+	checkkeyitem KEYITEM_GS_BALL
 	iffalse .NoGSBall
 	writetext KurtsHouseKurtWhatIsThatText
 	waitbutton
 	closetext
 	setevent EVENT_GAVE_GS_BALL_TO_KURT
-	takeitem GS_BALL
+	takekeyitem KEYITEM_GS_BALL
 	setflag ENGINE_KURT_MAKING_BALLS
 	end
 

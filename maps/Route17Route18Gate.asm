@@ -14,7 +14,7 @@ Route17Route18GateOfficerScript:
 	jumptextfaceplayer Route17Route18GateOfficerText
 
 Route17Route18GateBicycleCheck:
-	checkitem BICYCLE
+	checkkeyitem KEYITEM_BICYCLE
 	iffalse .NoBicycle
 	end
 

@@ -16,7 +16,7 @@ GoodRodGuru:
 	iffalse .DontWantIt
 	writetext GiveGoodRodText
 	promptbutton
-	verbosegiveitem GOOD_ROD
+	verbosegivekeyitem KEYITEM_GOOD_ROD
 	writetext GaveGoodRodText
 	waitbutton
 	closetext

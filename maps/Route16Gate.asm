@@ -14,7 +14,7 @@ Route16GateOfficerScript:
 	jumptextfaceplayer Route16GateOfficerText
 
 Route16GateBicycleCheck:
-	checkitem BICYCLE
+	checkkeyitem KEYITEM_BICYCLE
 	iffalse .NoBicycle
 	end
 

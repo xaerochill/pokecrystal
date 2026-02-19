@@ -20,7 +20,7 @@ GoldenrodBikeShopClerkScript:
 	writetext GoldenrodBikeShopClerkAgreedText
 	promptbutton
 	waitsfx
-	giveitem BICYCLE
+	verbosegivekeyitem KEYITEM_BICYCLE
 	writetext BorrowedABicycleText
 	playsound SFX_KEY_ITEM
 	waitsfx

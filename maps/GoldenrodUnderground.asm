@@ -373,7 +373,7 @@ BasementDoorScript::
 	opentext
 	checkevent EVENT_USED_BASEMENT_KEY
 	iftrue .Open
-	checkitem BASEMENT_KEY
+	checkkeyitem KEYITEM_BASEMENT_KEY
 	iftrue .Unlock
 	writetext GoldenrodUndergroundTheDoorsLockedText
 	waitbutton

@@ -48,7 +48,7 @@ Route36SuicuneScript:
 	end
 
 SudowoodoScript:
-	checkitem SQUIRTBOTTLE
+	checkkeyitem KEYITEM_SQUIRTBOTTLE
 	iftrue .Fight
 
 	waitsfx

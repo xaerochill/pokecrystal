@@ -92,7 +92,7 @@ RedGyarados:
 .NotBeaten:
 	reloadmapafterbattle
 	opentext
-	giveitem RED_SCALE
+	verbosegivekeyitem KEYITEM_RED_SCALE
 	waitsfx
 	writetext LakeOfRageGotRedScaleText
 	playsound SFX_ITEM

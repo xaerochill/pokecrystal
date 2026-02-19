@@ -10,7 +10,7 @@ TinTowerRoof_MapScripts:
 TinTowerRoofHoOhCallback:
 	checkevent EVENT_FOUGHT_HO_OH
 	iftrue .NoAppear
-	checkitem RAINBOW_WING
+	checkkeyitem KEYITEM_RAINBOW_WING
 	iftrue .Appear
 	sjump .NoAppear
 

@@ -28,7 +28,7 @@ PewterCityGrampsScript:
 	iftrue .GotSilverWing
 	writetext PewterCityGrampsText
 	promptbutton
-	verbosegiveitem SILVER_WING
+	verbosegivekeyitem KEYITEM_SILVER_WING
 	setevent EVENT_GOT_SILVER_WING
 	closetext
 	end

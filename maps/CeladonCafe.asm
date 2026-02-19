@@ -58,7 +58,7 @@ CeladonCafeFisher3:
 	end
 
 CeladonCafeTeacher:
-	checkitem COIN_CASE
+	checkkeyitem KEYITEM_COIN_CASE
 	iftrue .HasCoinCase
 	opentext
 	writetext TeacherText_CrunchCrunch

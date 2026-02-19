@@ -33,7 +33,7 @@ GoldenrodPokecenter1F_GSBallSceneLeft:
 	opentext
 	writetext GoldenrodPokeCenter1FLinkReceptionistPleaseAcceptGSBallText
 	waitbutton
-	verbosegiveitem GS_BALL
+	verbosegivekeyitem KEYITEM_GS_BALL
 	setevent EVENT_GOT_GS_BALL_FROM_GOLDENROD_POKEMON_CENTER
 	setevent EVENT_CAN_GIVE_GS_BALL_TO_KURT
 	writetext GoldenrodPokeCenter1FLinkReceptionistPleaseDoComeAgainText
@@ -65,7 +65,7 @@ GoldenrodPokecenter1F_GSBallSceneRight:
 	opentext
 	writetext GoldenrodPokeCenter1FLinkReceptionistPleaseAcceptGSBallText
 	waitbutton
-	verbosegiveitem GS_BALL
+	verbosegivekeyitem KEYITEM_GS_BALL
 	setevent EVENT_GOT_GS_BALL_FROM_GOLDENROD_POKEMON_CENTER
 	setevent EVENT_CAN_GIVE_GS_BALL_TO_KURT
 	writetext GoldenrodPokeCenter1FLinkReceptionistPleaseDoComeAgainText

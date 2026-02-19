@@ -193,7 +193,7 @@ TinTower1FSage5Script:
 	iftrue .GotRainbowWing
 	writetext TinTower1FSage5Text1
 	promptbutton
-	verbosegiveitem RAINBOW_WING
+	verbosegivekeyitem KEYITEM_RAINBOW_WING
 	closetext
 	reanchormap
 	earthquake 72
