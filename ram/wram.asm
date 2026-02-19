@@ -3002,6 +3002,9 @@ wTMsHMs:: flag_array NUM_TM_HM_FLAGS ; 8 bytes
 wNumItems:: db
 wItems:: ds MAX_ITEMS * 2 + 1
 
+wKeyItemFlags:: flag_array NUM_KEY_ITEM_FLAGS ; 3 bytes - offset by `wKeyItems` (MAX_KEY_ITEMS reduced from 26 to 23 bytes)
+
+; Display buffer - rebuilt from wKeyItemFlags before showing pocket menu
 wNumKeyItems:: db
 wKeyItems:: ds MAX_KEY_ITEMS + 1
 

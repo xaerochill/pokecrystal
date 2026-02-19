@@ -309,95 +309,199 @@ CheckTheItem:
 	ret
 
 ReceiveKeyItem:
-	ld hl, wNumKeyItems
-	ld a, [hli]
-	cp MAX_KEY_ITEMS
-	jr nc, .nope
-	ld c, a
-	ld b, 0
-	add hl, bc
+; input: wCurItem = item ID
+; output: carry set (always succeeds)
+	push bc
+	push de
+	push hl
+
 	ld a, [wCurItem]
-	ld [hli], a
-	ld [hl], -1
-	ld hl, wNumKeyItems
-	inc [hl]
-	scf
+	call ItemIDToKeyItemFlag
+	and a
+	jr z, .nope
+
+	dec a ; convert to 0-indexed for FlagAction
+	ld e, a
+	ld d, 0
+	ld hl, wKeyItemFlags
+	ld b, SET_FLAG
+	call FlagAction
+
+	pop hl
+	pop de
+	pop bc
+	scf ; always succeeds
 	ret
 
 .nope
+	pop hl
+	pop de
+	pop bc
 	and a
 	ret
 
 TossKeyItem:
-	ld a, [wCurItemQuantity]
+; input: wCurItem = item ID
+; output: carry set if successful
+	push bc
+	push de
+	push hl
+
+	ld a, [wCurItem]
+	call ItemIDToKeyItemFlag
+	and a
+	jr z, .nope
+
+	dec a
 	ld e, a
 	ld d, 0
-	ld hl, wNumKeyItems
-	ld a, [hl]
-	cp e
-	jr nc, .ok
-	call .Toss
-	ret nc
-	jr .ok2
+	ld hl, wKeyItemFlags
+	ld b, RESET_FLAG
+	call FlagAction
 
-.ok
-	dec [hl]
-	inc hl
-	add hl, de
-
-.ok2
-	ld d, h
-	ld e, l
-	inc hl
-.loop
-	ld a, [hli]
-	ld [de], a
-	inc de
-	cp -1
-	jr nz, .loop
+	pop hl
+	pop de
+	pop bc
 	scf
 	ret
 
-.Toss:
-	ld hl, wNumKeyItems
-	ld a, [wCurItem]
-	ld c, a
-.loop3
-	inc hl
-	ld a, [hl]
-	cp c
-	jr z, .ok3
-	cp -1
-	jr nz, .loop3
-	xor a
-	ret
-
-.ok3
-	ld a, [wNumKeyItems]
-	dec a
-	ld [wNumKeyItems], a
-	scf
-	ret
-
-CheckKeyItems:
-	ld a, [wCurItem]
-	ld c, a
-	ld hl, wKeyItems
-.loop
-	ld a, [hli]
-	cp c
-	jr z, .done
-	cp -1
-	jr nz, .loop
+.nope
+	pop hl
+	pop de
+	pop bc
 	and a
 	ret
 
-.done
-	scf
+CheckKeyItems:
+; input: wCurItem = item ID
+; output: carry set if owned
+	push bc
+	push de
+	push hl
+
+	ld a, [wCurItem]
+	call ItemIDToKeyItemFlag
+	and a
+	jr z, .not_owned
+
+	dec a
+	ld e, a
+	ld d, 0
+	ld hl, wKeyItemFlags
+	ld b, CHECK_FLAG
+	call FlagAction
+	ld a, c
+
+	pop hl
+	pop de
+	pop bc
+
+	and a
+	ret z ; no carry if not owned
+	scf   ; set carry if owned
+	ret
+
+.not_owned
+	pop hl
+	pop de
+	pop bc
+	and a
+	ret
+
+INCLUDE "data/items/key_item_flags.asm"
+
+_Script_checkkeyitem::
+	call GetScriptByte
+	dec a
+	ld e, a
+	ld d, 0
+	ld b, CHECK_FLAG
+	ld hl, wKeyItemFlags
+	call FlagAction
+	ld a, c
+	ld [wScriptVar], a
+	ret
+
+_Script_takekeyitem::
+	call GetScriptByte
+	dec a
+	ld e, a
+	ld d, 0
+	ld b, RESET_FLAG
+	ld hl, wKeyItemFlags
+	call FlagAction
+	ret
+
+_Script_verbosegivekeyitem::
+; sets flag, gets name into wStringBuffer1. Trampoline handles CopyConvertedText + ScriptCall.
+	call GetScriptByte
+	push af
+	dec a
+	ld e, a
+	ld d, 0
+	ld b, SET_FLAG
+	ld hl, wKeyItemFlags
+	call FlagAction
+	pop af
+	; get key item name (inline - same bank as KeyItemFlagToItemID)
+	ld c, a
+	ld b, 0
+	ld hl, KeyItemFlagToItemID
+	add hl, bc
+	ld a, [hl]
+	ld [wNamedObjectIndex], a
+	call GetItemName
+	ret
+
+_Script_getkeyitemname::
+; reads flag index, looks up item name into wStringBuffer1. Trampoline handles GetScriptByte + CopyConvertedText.
+	call GetScriptByte
+	ld c, a
+	ld b, 0
+	ld hl, KeyItemFlagToItemID
+	add hl, bc
+	ld a, [hl]
+	ld [wNamedObjectIndex], a
+	call GetItemName
+	ret
+
+; TM/HM script handler implementations (moved from scripting.asm to free bank space)
+
+_Script_checktmhm::
+	call GetScriptByte
+	dec a
+	ld e, a
+	ld d, 0
+	ld b, CHECK_FLAG
+	ld hl, wTMsHMs
+	call FlagAction
+	ld a, c
+	ld [wScriptVar], a
+	ret
+
+_Script_verbosegivetmhm::
+; sets flag, gets name into wStringBuffer1. Trampoline handles CopyConvertedText + ScriptCall.
+	call GetScriptByte
+	ld [wCurTMHM], a
+	dec a
+	ld e, a
+	ld d, 0
+	ld b, SET_FLAG
+	ld hl, wTMsHMs
+	call FlagAction
+	ld a, [wCurTMHM]
+	ld [wNamedObjectIndex], a
+	call GetTMHMName
+	ret
+
+_Script_gettmhmname::
+; gets TM/HM name into wStringBuffer1. Trampoline handles GetScriptByte + CopyConvertedText.
+	call GetScriptByte
+	ld [wNamedObjectIndex], a
+	call GetTMHMName
 	ret
 
 ReceiveTMHM::
-; add TM/HM to flag array
 ; input: c = TM/HM flag index (1-104)
 ; output: carry set if successful
 	push bc
@@ -415,11 +519,10 @@ ReceiveTMHM::
 	pop hl
 	pop de
 	pop bc
-	scf ; always succeeds (flags never "full")
+	scf ; always succeeds
 	ret
 
 TossTMHM::
-; remove TM/HM from flag array (for manual tossing)
 ; input: c = TM/HM flag index (1-104)
 	push bc
 	push de
@@ -439,7 +542,6 @@ TossTMHM::
 	ret
 
 CheckTMHM::
-; check if player has a TM/HM
 ; input: c = TM/HM flag index (1-104)
 ; output: carry set if player owns it
 	push bc

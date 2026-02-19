@@ -49,12 +49,9 @@ CheckRegisteredItem:
 
 .CheckKeyItem:
 	ld a, [wRegisteredItem]
-	ld hl, wKeyItems
-	ld de, 1
-	call IsInArray
-	jr nc, .NoRegisteredItem
-	ld a, [wRegisteredItem]
 	ld [wCurItem], a
+	farcall CheckKeyItems
+	jr nc, .NoRegisteredItem
 	and a
 	ret
 

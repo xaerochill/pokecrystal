@@ -90,6 +90,7 @@ Pack:
 	ret
 
 .InitKeyItemsPocket:
+	call BuildKeyItemList
 	ld a, KEY_ITEM_POCKET
 	ld [wCurPocket], a
 	call ClearPocketList
@@ -702,6 +703,7 @@ BattlePack:
 	ret
 
 .InitKeyItemsPocket:
+	call BuildKeyItemList
 	ld a, KEY_ITEM_POCKET
 	ld [wCurPocket], a
 	call ClearPocketList
@@ -965,6 +967,7 @@ DepositSellPack:
 	ret
 
 .KeyItemsPocket:
+	call BuildKeyItemList
 	ld a, KEY_ITEM_POCKET
 	call InitPocket
 	ld hl, PC_Mart_KeyItemsPocketMenuHeader
@@ -1113,6 +1116,7 @@ TutorialPack:
 	dba UpdateItemDescription
 
 .KeyItems:
+	call BuildKeyItemList
 	ld a, KEY_ITEM_POCKET
 	ld hl, .KeyItemsMenuHeader
 	jr .DisplayPocket
@@ -1577,6 +1581,65 @@ PackEmptyText:
 YouCantUseItInABattleText: ; unreferenced
 	text_far _YouCantUseItInABattleText
 	text_end
+
+BuildKeyItemList:
+; populate wNumKeyItems/wKeyItems display buffer from wKeyItemFlags
+	push hl
+	push de
+	push bc
+
+	ld de, wKeyItems
+	ld c, 1 ; flag index (1-based)
+	ld b, 0 ; count
+
+.loop
+	ld a, c
+	cp NUM_KEY_ITEM_FLAGS + 1
+	jr nc, .done
+
+	; check if this flag is set
+	push bc
+	push de
+	dec a
+	ld e, a
+	ld d, 0
+	ld hl, wKeyItemFlags
+	ld b, CHECK_FLAG
+	call FlagAction
+	pop de
+	pop bc
+	ld a, c
+	jr z, .skip
+
+	; flag is set — look up item ID
+	push bc
+	push de
+	ld hl, KeyItemFlagToItemID
+	ld b, 0
+	ld c, a
+	add hl, bc
+	ld a, BANK(KeyItemFlagToItemID)
+	call GetFarByte
+	pop de
+	pop bc
+	ld [de], a
+	inc de
+	inc b
+
+.skip
+	inc c
+	jr .loop
+
+.done
+	ld a, -1
+	ld [de], a ; terminate list
+	ld a, b
+	ld [wNumKeyItems], a
+
+	pop bc
+	pop de
+	pop hl
+	ret
 
 PackMenuGFX:
 INCBIN "gfx/pack/pack_menu.2bpp"

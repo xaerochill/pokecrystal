@@ -1085,4 +1085,30 @@ MACRO gettmhmname
 	db \1 ; string_buffer
 ENDM
 
+	const verbosegivekeyitem_command ; $ad
+MACRO verbosegivekeyitem
+	db verbosegivekeyitem_command
+	db \1 ; key item flag index (KEYITEM_*)
+ENDM
+
+	const checkkeyitem_command ; $ae
+MACRO checkkeyitem
+	db checkkeyitem_command
+	db \1 ; key item flag index
+	; sets wScriptVar to TRUE if owned, FALSE if not
+ENDM
+
+	const takekeyitem_command ; $af
+MACRO takekeyitem
+	db takekeyitem_command
+	db \1 ; key item flag index
+ENDM
+
+	const getkeyitemname_command ; $b0
+MACRO getkeyitemname
+	db getkeyitemname_command
+	db \2 ; key item flag index
+	db \1 ; string_buffer
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value
